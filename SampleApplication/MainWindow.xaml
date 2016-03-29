@@ -1,0 +1,59 @@
+﻿<Window x:Class="SampleApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:behaviors="clr-namespace:SampleApplication.Behaviors"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:views="clr-namespace:SampleApplication"
+        xmlns:vm="clr-namespace:SampleApplication.ViewModel"
+        Title="MainWindow"
+        Width="525"
+        Height="350">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <views:ListControl Grid.Row="0"
+                           Grid.Column="0"
+                           Margin="5" />
+        <views:ListControl Grid.Row="0"
+                           Grid.Column="1"
+                           Margin="5" />
+
+        <Rectangle Grid.Row="1"
+                   Grid.Column="0"
+                   Width="50"
+                   Height="50"
+                   AllowDrop="True"
+                   Fill="Orange">
+            <Rectangle.DataContext>
+                <vm:ViewModel1 />
+            </Rectangle.DataContext>
+            <i:Interaction.Behaviors>
+                <behaviors:DragStartBehavior AllowedEffects="Copy" DragDropData="{Binding}" />
+                <behaviors:DragAcceptBehavior Description="{Binding Description}" />
+            </i:Interaction.Behaviors>
+        </Rectangle>
+        <Rectangle Grid.Row="1"
+                   Grid.Column="1"
+                   Width="50"
+                   Height="50"
+                   AllowDrop="True"
+                   Fill="Blue">
+            <Rectangle.DataContext>
+                <vm:ViewModel2 />
+            </Rectangle.DataContext>
+            <i:Interaction.Behaviors>
+                <behaviors:DragStartBehavior AllowedEffects="Copy" DragDropData="{Binding}" />
+                <behaviors:DragAcceptBehavior Description="{Binding Description}" />
+            </i:Interaction.Behaviors>
+        </Rectangle>
+    </Grid>
+</Window>
