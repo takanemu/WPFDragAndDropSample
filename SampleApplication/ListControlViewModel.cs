@@ -45,15 +45,35 @@ namespace SampleApplication.ViewModel
 
         private void Description_DragDrop(System.Windows.DragEventArgs args)
         {
+            if (args.Data.GetDataPresent(typeof(ListItemViewModel)))
+            {
+                var data = args.Data.GetData(typeof(ListItemViewModel)) as ListItemViewModel;
+                var fe = args.OriginalSource as FrameworkElement;
+
+                if (fe != null)
+                {
+                    if (fe.DataContext is ListControlViewModel)
+                    {
+                        // リスト本体へドロップ
+                    }
+                    else if (fe.DataContext is ListItemViewModel)
+                    {
+                        // リスト項目へドロップ
+                    }
+                }
+            }
         }
 
         private void Description_DragOver(System.Windows.DragEventArgs args)
         {
-            if (args.AllowedEffects.HasFlag(DragDropEffects.Move) &&
-                args.Data.GetDataPresent(typeof(String)))
+            if (args.AllowedEffects.HasFlag(DragDropEffects.Copy))
             {
-                args.Effects = DragDropEffects.Move;
+                if (args.Data.GetDataPresent(typeof(ListItemViewModel)))
+                {
+                    return;
+                }
             }
+            args.Effects = DragDropEffects.None;
         }
 
         public ListControlViewModel()

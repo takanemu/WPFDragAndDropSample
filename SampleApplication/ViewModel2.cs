@@ -47,11 +47,14 @@ namespace SampleApplication.ViewModel
 
         private void Description_DragOver(System.Windows.DragEventArgs args)
         {
-            if (args.AllowedEffects.HasFlag(DragDropEffects.Move) &&
-                args.Data.GetDataPresent(typeof(String)))
+            if (args.AllowedEffects.HasFlag(DragDropEffects.Copy))
             {
-                args.Effects = DragDropEffects.Move;
+                if (args.Data.GetDataPresent(typeof(ViewModel1)))
+                {
+                    return;
+                }
             }
+            args.Effects = DragDropEffects.None;
         }
     }
 }

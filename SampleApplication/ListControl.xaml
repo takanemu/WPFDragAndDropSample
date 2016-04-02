@@ -16,6 +16,7 @@
     </UserControl.DataContext>
 
     <ItemsControl AllowDrop="True"
+                  Background="Transparent"
                   ItemsSource="{Binding ItemsSource}"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                   ScrollViewer.VerticalScrollBarVisibility="Auto">
